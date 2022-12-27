@@ -1,1 +1,0 @@
-# Bot-against-bots-in-the-Vk-chat
