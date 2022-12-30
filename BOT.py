@@ -9,9 +9,7 @@ Id_key = Api ключ группы.
 Grop_Id = Айди группы. Только цифры!
 My_Id = Ключ пользователя. С разрешением на управление группами!
 '''
-
-
-def Rum():  # Запуск
+while True:
     # Узнает, есть ли ты в группе
     def check_user(Grop_Id, from_ID):
         Member = Api_Chat.method('groups.isMember', {'group_id': Grop_Id,
@@ -53,12 +51,11 @@ def Rum():  # Запуск
                 # Премежуточный ID смс
                 message_ID = event.message.get('conversation_message_id')
                 # Информация о смс
-                message_ID1 = check_message_ID(event, message_ID)
+                message_INFO = check_message_ID(event, message_ID)
                 # Реальный ID смс
-                message_ID2 = message_ID1['items'][0]['id']
+                message_ID2 = message_INFO['items'][0]['id']
                 # User ID отправтеля
                 from_ID = event.message.get('from_id')
-                # Комент НЕГОДЯЮ
                 comment_in_Ban = 'Текст'
                 # Определяем, является ли отправитель участником группы
                 Check_User_group = check_user(Grop_Id, from_ID)
@@ -69,13 +66,12 @@ def Rum():  # Запуск
                     user_del(Grop_Id, from_ID, comment_in_Ban)
                 else:
                     pass
-    # Ловим все ошибки
     except Exception:
-        # Вывод в консоль сообщение, что произошла ошибка
-        print('\nERROR_VK')
-        # Перезапуск через 3 секунды
-        time.sleep(3)
-        Rum()
-
-
-Rum()
+        try:
+            print('\nERROR_VK')
+            # Перезапуск через 3 секунды
+            time.sleep(3)
+        except Exception:
+            print('\nERROR_VK')
+            # Перезапуск через 10 секунды
+            time.sleep(10)
