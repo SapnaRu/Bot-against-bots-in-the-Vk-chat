@@ -67,11 +67,12 @@ while True:
                 else:
                     pass
     except Exception:
-        try:
-            print('\nERROR_VK')
-            # Перезапуск через 3 секунды
-            time.sleep(3)
-        except Exception:
-            print('\nERROR_VK')
-            # Перезапуск через 10 секунды
-            time.sleep(10)
+        while True:
+            try:
+                print('\nERROR_VK')
+                # Перезапуск через 3 секунды
+                time.sleep(3)
+            except Exception:
+                pass
+            else:
+                break
