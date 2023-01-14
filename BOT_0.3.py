@@ -36,15 +36,16 @@ while True:
         a = Api_Chat.method('messages.getByConversationMessageId', {'peer_id': event.message.get('peer_id'),
                                                                     'conversation_message_ids': message_ID})
         return a
-    # Указываем ключик от группы
-    Api_Chat = vk_api.VkApi(token=ID_key)
-    # Указываем личный ключик
-    My_Id1 = vk_api.VkApi(token=My_Id)
-    # Подключаем бота
-    Type_Poll = VkBotLongPoll(Api_Chat, Grop_Id)
-    # Статус старта
-    print('Launched')
-    try:  # Во избежания сбоев, ловим ошибки
+    # Во избежания сбоев, ловим ошибки
+    try:
+        # Указываем ключик от группы
+        Api_Chat = vk_api.VkApi(token=ID_key)
+        # Указываем личный ключик
+        My_Id1 = vk_api.VkApi(token=My_Id)
+        # Подключаем бота
+        Type_Poll = VkBotLongPoll(Api_Chat, Grop_Id)
+        # Статус старта
+        print('Launched')
         for event in Type_Poll.listen():   # Запуск бота
             # Ловим смс
             if event.type == VkBotEventType.MESSAGE_NEW and event.from_chat:
@@ -67,12 +68,6 @@ while True:
                 else:
                     pass
     except Exception:
-        while True:
-            try:
-                print('\nERROR_VK')
-                # Перезапуск через 3 секунды
-                time.sleep(3)
-            except Exception:
-                pass
-            else:
-                break
+        print('\nERROR_VK')
+        # Перезапуск через 3 секунды
+        time.sleep(3)
